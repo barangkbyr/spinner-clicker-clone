@@ -14,10 +14,10 @@ namespace Assets.Scripts {
 
         private void Awake() {
             numberOfBallsText.text = _maxNumberOfBalls.ToString();
-            Upgrades.OnBallUpgradeBought += OnBallUpgradeBought;
+            Upgrades.OnUpgradeBought += OnUpgradeBought;
         }
 
-        private void OnBallUpgradeBought() {
+        private void OnUpgradeBought() {
             numberOfBallsText.text = _maxNumberOfBalls.ToString();
         }
 
@@ -25,7 +25,6 @@ namespace Assets.Scripts {
             if (_activeNumberOfBalls < _maxNumberOfBalls) {
                 Invoke(nameof(SpawnBalls), 2f);
                 _activeNumberOfBalls++;
-                //numberOfBallsText.text = _maxNumberOfBalls.ToString();
             }
         }
 

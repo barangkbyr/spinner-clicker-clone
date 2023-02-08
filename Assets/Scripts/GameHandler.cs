@@ -6,12 +6,19 @@ namespace Assets.Scripts {
         private static Transform pivotPoint;
 
         public TextMeshProUGUI totalCurrencyText;
+        public TextMeshProUGUI currencyMultiplierText;
         
         public static int totalCurrency;
         public static int currencyMultiplier = 1;
 
         private void Awake() {
             Ball.OnBallDestroy += OnBallDestroy;
+            Upgrades.OnUpgradeBought += OnUpgradeBought;
+            RefreshUi();
+        }
+
+        private void OnUpgradeBought() {
+            RefreshUi();
         }
 
         private void Start() {
@@ -30,6 +37,7 @@ namespace Assets.Scripts {
 
         private void RefreshUi() {
             totalCurrencyText.text = totalCurrency.ToString();
+            currencyMultiplierText.text = currencyMultiplier + "x";
         }
 
         private void AddPoint() {

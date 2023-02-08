@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts {
     public class Upgrades : MonoBehaviour {
-        public static Action OnBallUpgradeBought;
+        public static Action OnUpgradeBought;
 
         private int _ballUpgradeCost = 200;
         private int _scoopAddCost = 250;
@@ -27,7 +27,7 @@ namespace Assets.Scripts {
             if (currency >= _ballUpgradeCost) {
                 GameHandler.totalCurrency = currency - _ballUpgradeCost;
                 BallSpawner._maxNumberOfBalls++;
-                OnBallUpgradeBought?.Invoke();
+                OnUpgradeBought?.Invoke();
                 _ballUpgradeCost *= 2;
                 RefreshUi();
             }
@@ -50,6 +50,7 @@ namespace Assets.Scripts {
             if (currency >= _currencyMultiplierCost) {
                 GameHandler.totalCurrency = currency - _currencyMultiplierCost;
                 GameHandler.currencyMultiplier++;
+                OnUpgradeBought?.Invoke();
                 _currencyMultiplierCost *= 2;
                 RefreshUi();
             }
