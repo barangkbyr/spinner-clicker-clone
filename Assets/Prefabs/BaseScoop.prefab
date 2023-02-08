@@ -172,7 +172,9 @@ MonoBehaviour:
   pivotPoint: {fileID: 0}
   baseScoop: {fileID: 11400000, guid: a829a3f3f4443e34c8d64c714419ebea, type: 2}
   _rotationSpeed: 100
-  _rotationBuffDuration: 5
+  rotationBuffButton: {fileID: 0}
+  timerText: {fileID: 0}
+  timer: {fileID: 0}
 --- !u!1 &3882165032263609856
 GameObject:
   m_ObjectHideFlags: 0
