@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts {
     public class Scoop : MonoBehaviour {
@@ -6,7 +7,11 @@ namespace Assets.Scripts {
         public BaseScoop baseScoop;
         public float _rotationSpeed;
 
-        [SerializeField]
+        public Button rotationBuffButton;
+
+        public GameObject timerText;
+        public GameObject timer;
+
         private float _rotationBuffDuration = 10f;
 
         private void Start() {
@@ -20,6 +25,9 @@ namespace Assets.Scripts {
 
         public void TempRotationBuff() {
             var activeScoops = GameObject.FindGameObjectsWithTag("Scoop");
+            rotationBuffButton.interactable = false;
+            timerText.SetActive(true);
+            timer.SetActive(true);
 
             foreach (var activeScoop in activeScoops) {
                 activeScoop.GetComponent<Scoop>()._rotationSpeed += 50;
@@ -34,6 +42,10 @@ namespace Assets.Scripts {
             foreach (var activeScoop in activeScoops) {
                 activeScoop.GetComponent<Scoop>()._rotationSpeed = baseScoop.rotationSpeed;
             }
+
+            timerText.SetActive(false);
+            timer.SetActive(false);
+            rotationBuffButton.interactable = true;
         }
     }
 }
