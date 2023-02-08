@@ -1,14 +1,14 @@
-using System;
 using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts {
     public class GameHandler : MonoBehaviour {
-        public GameObject scoop;
-        public Transform pivotPoint;
-        public TextMeshProUGUI totalCurrencyText;
+        private static Transform pivotPoint;
 
-        public int totalCurrency = 0;
+        public TextMeshProUGUI totalCurrencyText;
+        
+        public static int totalCurrency;
+        public static int currencyMultiplier = 1;
 
         private void Awake() {
             Ball.OnBallDestroy += OnBallDestroy;
@@ -24,7 +24,7 @@ namespace Assets.Scripts {
             RefreshUi();
         }
 
-        private void SpawnNewScoop(GameObject objectToSpawn) {
+        public static void SpawnNewScoop(GameObject objectToSpawn) {
             Instantiate(objectToSpawn, new Vector3(0, 0, -10), pivotPoint.rotation);
         }
 
@@ -32,12 +32,8 @@ namespace Assets.Scripts {
             totalCurrencyText.text = totalCurrency.ToString();
         }
 
-        public void SpawnButton() {
-            SpawnNewScoop(scoop);
-        }
-
         private void AddPoint() {
-            totalCurrency += 10;
+            totalCurrency += 10 * currencyMultiplier;
         }
     }
 }

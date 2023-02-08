@@ -1,4 +1,4 @@
-using System;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts {
@@ -7,15 +7,25 @@ namespace Assets.Scripts {
 
         public Transform spawnLocation;
 
-        private int _maxNumberOfBalls = 3;
-        public static int _activeNumberOfBalls = 0;
+        public TextMeshProUGUI numberOfBallsText;
 
-        void Update() { }
+        public static int _maxNumberOfBalls = 4;
+        public static int _activeNumberOfBalls;
+
+        private void Awake() {
+            numberOfBallsText.text = _maxNumberOfBalls.ToString();
+            Upgrades.OnBallUpgradeBought += OnBallUpgradeBought;
+        }
+
+        private void OnBallUpgradeBought() {
+            numberOfBallsText.text = _maxNumberOfBalls.ToString();
+        }
 
         private void FixedUpdate() {
-            if (_activeNumberOfBalls <= _maxNumberOfBalls) {
+            if (_activeNumberOfBalls < _maxNumberOfBalls) {
                 Invoke(nameof(SpawnBalls), 2f);
                 _activeNumberOfBalls++;
+                //numberOfBallsText.text = _maxNumberOfBalls.ToString();
             }
         }
 

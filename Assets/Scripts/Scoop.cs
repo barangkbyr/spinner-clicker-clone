@@ -18,7 +18,7 @@ namespace Assets.Scripts {
             gameObject.transform.RotateAround(pivotPoint.position, -Vector3.forward, _rotationSpeed * Time.deltaTime);
         }
 
-        public void TestButton() {
+        public void TempRotationBuff() {
             var activeScoops = GameObject.FindGameObjectsWithTag("Scoop");
 
             foreach (var activeScoop in activeScoops) {
