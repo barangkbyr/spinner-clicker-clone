@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts {
     public class Upgrades : MonoBehaviour {
@@ -26,7 +25,7 @@ namespace Assets.Scripts {
             
             if (currency >= _ballUpgradeCost) {
                 GameHandler.totalCurrency = currency - _ballUpgradeCost;
-                BallSpawner._maxNumberOfBalls++;
+                BallSpawner.maxNumberOfBalls++;
                 OnUpgradeBought?.Invoke();
                 _ballUpgradeCost *= 2;
                 RefreshUi();

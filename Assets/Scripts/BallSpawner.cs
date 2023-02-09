@@ -9,22 +9,22 @@ namespace Assets.Scripts {
 
         public TextMeshProUGUI numberOfBallsText;
 
-        public static int _maxNumberOfBalls = 4;
-        public static int _activeNumberOfBalls;
+        public static int maxNumberOfBalls = 4;
+        public static int activeNumberOfBalls;
 
         private void Awake() {
-            numberOfBallsText.text = _maxNumberOfBalls.ToString();
+            numberOfBallsText.text = maxNumberOfBalls.ToString();
             Upgrades.OnUpgradeBought += OnUpgradeBought;
         }
 
         private void OnUpgradeBought() {
-            numberOfBallsText.text = _maxNumberOfBalls.ToString();
+            numberOfBallsText.text = maxNumberOfBalls.ToString();
         }
 
         private void FixedUpdate() {
-            if (_activeNumberOfBalls < _maxNumberOfBalls) {
+            if (activeNumberOfBalls < maxNumberOfBalls) {
                 Invoke(nameof(SpawnBalls), 2f);
-                _activeNumberOfBalls++;
+                activeNumberOfBalls++;
             }
         }
 

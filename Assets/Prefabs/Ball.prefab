@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToAttach: {fileID: 0}
-  followSpeed: 150
+  followSpeed: 250
 --- !u!58 &6361730177869306816
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ namespace Assets.Scripts {
     public class Scoop : MonoBehaviour {
         public Transform pivotPoint;
         public BaseScoop baseScoop;
-        public float _rotationSpeed;
+        public float rotationSpeed;
 
         public Button rotationBuffButton;
 
@@ -16,11 +16,11 @@ namespace Assets.Scripts {
 
         private void Start() {
             pivotPoint = GameObject.FindGameObjectWithTag("Pivot").transform;
-            _rotationSpeed = baseScoop.rotationSpeed;
+            rotationSpeed = baseScoop.rotationSpeed;
         }
 
         private void Update() {
-            gameObject.transform.RotateAround(pivotPoint.position, -Vector3.forward, _rotationSpeed * Time.deltaTime);
+            gameObject.transform.RotateAround(pivotPoint.position, -Vector3.forward, rotationSpeed * Time.deltaTime);
         }
 
         public void TempRotationBuff() {
@@ -30,7 +30,7 @@ namespace Assets.Scripts {
             timer.SetActive(true);
 
             foreach (var activeScoop in activeScoops) {
-                activeScoop.GetComponent<Scoop>()._rotationSpeed += 50;
+                activeScoop.GetComponent<Scoop>().rotationSpeed += 50;
             }
 
             Invoke(nameof(ReturnBackToDefaultRotateSpeed), _rotationBuffDuration);
@@ -40,7 +40,7 @@ namespace Assets.Scripts {
             var activeScoops = GameObject.FindGameObjectsWithTag("Scoop");
 
             foreach (var activeScoop in activeScoops) {
-                activeScoop.GetComponent<Scoop>()._rotationSpeed = baseScoop.rotationSpeed;
+                activeScoop.GetComponent<Scoop>().rotationSpeed = baseScoop.rotationSpeed;
             }
 
             timerText.SetActive(false);

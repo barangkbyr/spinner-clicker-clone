@@ -29,7 +29,7 @@ namespace Assets.Scripts {
         private void OnDestroy() {
             _isTouchingScoop = false;
             OnBallDestroy?.Invoke();
-            BallSpawner._activeNumberOfBalls--;
+            BallSpawner.activeNumberOfBalls--;
         }
     }
 }

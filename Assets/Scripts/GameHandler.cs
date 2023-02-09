@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts {
     public class GameHandler : MonoBehaviour {
-        private static Transform pivotPoint;
+        private static Transform _pivotPoint;
 
         public TextMeshProUGUI totalCurrencyText;
         public TextMeshProUGUI currencyMultiplierText;
@@ -22,7 +22,7 @@ namespace Assets.Scripts {
         }
 
         private void Start() {
-            pivotPoint = GameObject.FindGameObjectWithTag("Pivot").transform;
+            _pivotPoint = GameObject.FindGameObjectWithTag("Pivot").transform;
             totalCurrencyText.text = totalCurrency.ToString();
         }
 
@@ -32,7 +32,7 @@ namespace Assets.Scripts {
         }
 
         public static void SpawnNewScoop(GameObject objectToSpawn) {
-            Instantiate(objectToSpawn, new Vector3(0, 0, -10), pivotPoint.rotation);
+            Instantiate(objectToSpawn, new Vector3(0, 0, -10), _pivotPoint.rotation);
         }
 
         private void RefreshUi() {
