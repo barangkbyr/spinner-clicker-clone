@@ -27,7 +27,7 @@ namespace Assets.Scripts {
         }
 
         private void OnBallDestroy() {
-            AddPoint();
+            AddPoint(10);
             RefreshUi();
         }
 
@@ -40,8 +40,8 @@ namespace Assets.Scripts {
             currencyMultiplierText.text = currencyMultiplier + "x";
         }
 
-        private void AddPoint() {
-            totalCurrency += 10 * currencyMultiplier;
+        private void AddPoint(int point) {
+            totalCurrency += point * currencyMultiplier;
         }
     }
 }
