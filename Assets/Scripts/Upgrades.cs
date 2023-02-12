@@ -6,9 +6,9 @@ namespace Assets.Scripts {
     public class Upgrades : MonoBehaviour {
         public static Action OnUpgradeBought;
 
-        private int _ballUpgradeCost = 200;
-        private int _scoopAddCost = 250;
-        private int _currencyMultiplierCost = 2000;
+        private int _ballUpgradeCost = 250;
+        private int _scoopAddCost = 300;
+        private int _currencyMultiplierCost = 2500;
 
         public TextMeshProUGUI ballUpgradeCostText;
         public TextMeshProUGUI scoopAddCostText;

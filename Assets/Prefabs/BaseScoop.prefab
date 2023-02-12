@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivotPoint: {fileID: 0}
   baseScoop: {fileID: 11400000, guid: a829a3f3f4443e34c8d64c714419ebea, type: 2}
-  _rotationSpeed: 100
+  rotationSpeed: 0
   rotationBuffButton: {fileID: 0}
   timerText: {fileID: 0}
   timer: {fileID: 0}
