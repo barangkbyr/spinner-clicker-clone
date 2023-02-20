@@ -8,6 +8,9 @@ TagManager:
   - Pivot
   - Ball
   - ScoopTop
+  - TimerText
+  - Timer
+  - DestroyZone
   layers:
   - Default
   - TransparentFX

@@ -3,11 +3,14 @@ using UnityEngine;
 
 namespace Assets.Scripts {
     public class BallSpawner : MonoBehaviour {
-        public GameObject ball;
+        [SerializeField]
+        private GameObject ball;
 
-        public Transform spawnLocation;
+        [SerializeField]
+        private Transform spawnLocation;
 
-        public TextMeshProUGUI numberOfBallsText;
+        [SerializeField]
+        private TextMeshProUGUI numberOfBallsText;
 
         public static int maxNumberOfBalls = 4;
         public static int activeNumberOfBalls;
@@ -23,7 +26,7 @@ namespace Assets.Scripts {
 
         private void FixedUpdate() {
             if (activeNumberOfBalls < maxNumberOfBalls) {
-                Invoke(nameof(SpawnBalls), 2f);
+                Invoke(nameof(SpawnBalls), 0.2f);
                 activeNumberOfBalls++;
             }
         }

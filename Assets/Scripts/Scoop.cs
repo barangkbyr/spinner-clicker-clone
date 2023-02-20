@@ -3,34 +3,48 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts {
     public class Scoop : MonoBehaviour {
-        public Transform pivotPoint;
-        public BaseScoop baseScoop;
-        public float rotationSpeed;
+        [SerializeField]
+        private Transform _pivotPoint;
 
-        public Button rotationBuffButton;
+        [SerializeField]
+        private BaseScoop _baseScoop;
 
-        public GameObject timerText;
-        public GameObject timer;
+        [SerializeField]
+        private float _rotationSpeed;
+
+        public int _scoopLevel;
+
+        [SerializeField]
+        private Button _rotationBuffButton;
 
         private float _rotationBuffDuration = 10f;
 
         private void Start() {
-            pivotPoint = GameObject.FindGameObjectWithTag("Pivot").transform;
-            rotationSpeed = baseScoop.rotationSpeed;
+            Init();
         }
 
         private void Update() {
-            gameObject.transform.RotateAround(pivotPoint.position, -Vector3.forward, rotationSpeed * Time.deltaTime);
+            gameObject.transform.RotateAround(_pivotPoint.position, -Vector3.forward, _rotationSpeed * Time.deltaTime);
+        }
+
+        private void Init() {
+            _rotationSpeed = _baseScoop.rotationSpeed * _baseScoop.scoopLevel;
+            _scoopLevel = _baseScoop.scoopLevel;
+            _pivotPoint = GameObject.FindGameObjectWithTag("Pivot").transform;
+        }
+
+        public void LevelUp() {
+            _scoopLevel++;
+            _rotationSpeed = _baseScoop.rotationSpeed * _scoopLevel;
         }
 
         public void TempRotationBuff() {
+            Timer.isButtonPressed = true;
             var activeScoops = GameObject.FindGameObjectsWithTag("Scoop");
-            rotationBuffButton.interactable = false;
-            timerText.SetActive(true);
-            timer.SetActive(true);
+            _rotationBuffButton.interactable = false;
 
             foreach (var activeScoop in activeScoops) {
-                activeScoop.GetComponent<Scoop>().rotationSpeed += 50;
+                activeScoop.GetComponent<Scoop>()._rotationSpeed += 50;
             }
 
             Invoke(nameof(ReturnBackToDefaultRotateSpeed), _rotationBuffDuration);
@@ -40,12 +54,11 @@ namespace Assets.Scripts {
             var activeScoops = GameObject.FindGameObjectsWithTag("Scoop");
 
             foreach (var activeScoop in activeScoops) {
-                activeScoop.GetComponent<Scoop>().rotationSpeed = baseScoop.rotationSpeed;
+                activeScoop.GetComponent<Scoop>()._rotationSpeed = _baseScoop.rotationSpeed;
             }
 
-            timerText.SetActive(false);
-            timer.SetActive(false);
-            rotationBuffButton.interactable = true;
+            _rotationBuffButton.interactable = true;
+            Timer.isButtonPressed = false;
         }
     }
 }

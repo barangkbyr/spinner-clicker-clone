@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!58 &1493873533
 CircleCollider2D:
@@ -169,12 +169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bd4c310b7097d4a97b0346f1226bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivotPoint: {fileID: 0}
-  baseScoop: {fileID: 11400000, guid: a829a3f3f4443e34c8d64c714419ebea, type: 2}
-  rotationSpeed: 0
-  rotationBuffButton: {fileID: 0}
-  timerText: {fileID: 0}
-  timer: {fileID: 0}
+  _pivotPoint: {fileID: 0}
+  _baseScoop: {fileID: 11400000, guid: a829a3f3f4443e34c8d64c714419ebea, type: 2}
+  _rotationSpeed: 0
+  _scoopLevel: 0
+  _rotationBuffButton: {fileID: 0}
 --- !u!1 &3882165032263609856
 GameObject:
   m_ObjectHideFlags: 0

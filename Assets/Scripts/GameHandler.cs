@@ -3,11 +3,17 @@ using UnityEngine;
 
 namespace Assets.Scripts {
     public class GameHandler : MonoBehaviour {
-        private static Transform _pivotPoint;
+        [SerializeField]
+        private TextMeshProUGUI _totalCurrencyText;
 
-        public TextMeshProUGUI totalCurrencyText;
-        public TextMeshProUGUI currencyMultiplierText;
-        
+        [SerializeField]
+        private TextMeshProUGUI _currencyMultiplierText;
+
+        [SerializeField]
+        private TextMeshProUGUI _earningsPerSecondText;
+
+        private float totalEarnedSinceStart;
+
         public static int totalCurrency;
         public static int currencyMultiplier = 1;
 
@@ -22,8 +28,17 @@ namespace Assets.Scripts {
         }
 
         private void Start() {
-            _pivotPoint = GameObject.FindGameObjectWithTag("Pivot").transform;
-            totalCurrencyText.text = totalCurrency.ToString();
+            _totalCurrencyText.text = totalCurrency.ToString();
+        }
+
+        private void Update() {
+            CalculateEarningsPerSecond();
+        }
+
+        private void CalculateEarningsPerSecond() {
+            var timeFromStart = Time.timeSinceLevelLoad;
+            var earningsPerSecond = totalEarnedSinceStart / timeFromStart;
+            _earningsPerSecondText.text = earningsPerSecond.ToString("N1") + " per/sec";
         }
 
         private void OnBallDestroy() {
@@ -31,17 +46,19 @@ namespace Assets.Scripts {
             RefreshUi();
         }
 
-        public static void SpawnNewScoop(GameObject objectToSpawn) {
-            Instantiate(objectToSpawn, new Vector3(0, 0, -10), _pivotPoint.rotation);
-        }
-
         private void RefreshUi() {
-            totalCurrencyText.text = totalCurrency.ToString();
-            currencyMultiplierText.text = currencyMultiplier + "x";
+            _totalCurrencyText.text = totalCurrency.ToString();
+            _currencyMultiplierText.text = currencyMultiplier + "x";
         }
 
         private void AddPoint(int point) {
             totalCurrency += point * currencyMultiplier;
+            totalEarnedSinceStart += point * currencyMultiplier;
+        }
+
+        public void CheatAdd() {
+            AddPoint(1000);
+            RefreshUi();
         }
     }
 }

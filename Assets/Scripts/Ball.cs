@@ -13,8 +13,11 @@ namespace Assets.Scripts {
 
         private bool _isTouchingScoop;
 
+        private bool _isBallAttached;
+
         private void OnCollisionEnter2D(Collision2D other) {
-            if (other.gameObject.CompareTag("ScoopTop")) {
+            if (other.gameObject.CompareTag("ScoopTop") && !_isBallAttached) {
+                _isBallAttached = true;
                 objectToAttach = other.gameObject;
                 _isTouchingScoop = true;
             }
