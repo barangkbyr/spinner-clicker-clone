@@ -15,6 +15,7 @@ namespace Assets.Scripts {
         public static int maxNumberOfBalls = 4;
         public static int activeNumberOfBalls;
 
+
         private void Awake() {
             numberOfBallsText.text = maxNumberOfBalls.ToString();
             Upgrades.OnUpgradeBought += OnUpgradeBought;

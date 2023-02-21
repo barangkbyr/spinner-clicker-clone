@@ -11,7 +11,7 @@ namespace Assets.Scripts {
         [SerializeField]
         private float followSpeed = 2f;
 
-        private bool _isTouchingScoop;
+        public bool _isTouchingScoop;
 
         private bool _isBallAttached;
 
@@ -20,6 +20,12 @@ namespace Assets.Scripts {
                 _isBallAttached = true;
                 objectToAttach = other.gameObject;
                 _isTouchingScoop = true;
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D other) {
+            if (other.gameObject.CompareTag("ScoopTop")) {
+                Destroy(gameObject);
             }
         }
 

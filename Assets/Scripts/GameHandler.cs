@@ -55,10 +55,5 @@ namespace Assets.Scripts {
             totalCurrency += point * currencyMultiplier;
             totalEarnedSinceStart += point * currencyMultiplier;
         }
-
-        public void CheatAdd() {
-            AddPoint(1000);
-            RefreshUi();
-        }
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts {
     public class Upgrades : MonoBehaviour {
         public static Action OnUpgradeBought;
-        public static Action OnMerge;
 
         private int _ballUpgradeCost = 250;
         private int _scoopAddCost = 300;
@@ -30,23 +30,28 @@ namespace Assets.Scripts {
         private GameObject scoopObject;
 
         [SerializeField]
-        private Transform _pivotPoint;
+        private List<Scoop> scoopList;
 
         [SerializeField]
-        private List<Scoop> scoopList;
+        private BaseScoop _baseScoop;
+
+        private bool recentlyTouched;
+
+        [SerializeField]
+        private float _buffTimer;
 
         void Start() {
             scoopList = GameObject.FindObjectsOfType<Scoop>().ToList();
             RefreshUi();
         }
 
-        private void SpawnScoop(GameObject objectToSpawn) {
-            Instantiate(objectToSpawn, new Vector3(0, 0, -10), _pivotPoint.rotation * Quaternion.Euler(0f, 0f, 90f));
-            scoopList = GameObject.FindObjectsOfType<Scoop>().ToList();
+        private void Update() {
+            CheckForTimer();
         }
 
-        public void ScoopLevelUp(Scoop scoop) {
-            scoop.LevelUp();
+        private void SpawnScoop(GameObject objectToSpawn) {
+            Instantiate(objectToSpawn, new Vector3(0, 0, -10), Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+            scoopList = GameObject.FindObjectsOfType<Scoop>().ToList();
         }
 
         public void MergeScoops() {
@@ -107,6 +112,29 @@ namespace Assets.Scripts {
                 OnUpgradeBought?.Invoke();
                 _currencyMultiplierCost *= 2;
                 RefreshUi();
+            }
+        }
+
+        private void CheckForTimer() {
+            if (recentlyTouched) {
+                _buffTimer += Time.deltaTime;
+                if (_buffTimer >= 5) {
+                    _buffTimer = 0;
+                    recentlyTouched = false;
+
+                    foreach (var scoop in scoopList) {
+                        var rotSpeed = _baseScoop.rotationSpeed * scoop._scoopLevel;
+                        scoop._rotationSpeed = rotSpeed;
+                    }
+                }
+            }
+        }
+
+        public void TouchBuff() {
+            recentlyTouched = true;
+
+            foreach (var scoops in scoopList) {
+                scoops._rotationSpeed += 20;
             }
         }
 
